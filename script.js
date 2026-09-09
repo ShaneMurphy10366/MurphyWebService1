@@ -41,6 +41,95 @@
     });
   }
 
+
+  /* --- speed demo --------------------------------------------------
+     Two lanes fill at different rates when the button is pressed.
+     Reduced-motion users get the finished state and the numbers.
+  ------------------------------------------------------------------ */
+  var runBtn = document.getElementById('speed-run');
+  var demo = document.getElementById('speed-demo');
+
+  if (runBtn && demo) {
+    var lanes = [
+      { el: demo.querySelector('[data-lane="slow"]'), duration: 6400 },
+      { el: demo.querySelector('[data-lane="fast"]'), duration: 900 }
+    ];
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var timers = [];
+
+    var reset = function () {
+      timers.forEach(clearTimeout);
+      timers = [];
+      lanes.forEach(function (lane) {
+        lane.el.classList.remove('is-running', 'is-done');
+        lane.el.querySelector('.sd-fill').style.height = '0%';
+        var t = lane.el.querySelector('[data-time]');
+        t.textContent = '\u2014';
+        t.removeAttribute('data-done');
+      });
+    };
+
+    var finish = function (lane) {
+      lane.el.classList.remove('is-running');
+      lane.el.classList.add('is-done');
+      lane.el.querySelector('.sd-fill').style.height = '100%';
+      var t = lane.el.querySelector('[data-time]');
+      t.textContent = (lane.duration / 1000).toFixed(1) + 's';
+      t.setAttribute('data-done', '');
+    };
+
+    runBtn.addEventListener('click', function () {
+      reset();
+      runBtn.disabled = true;
+      runBtn.textContent = 'Loading\u2026';
+
+      lanes.forEach(function (lane) {
+        if (reduced) { finish(lane); return; }
+
+        lane.el.classList.add('is-running');
+        var fill = lane.el.querySelector('.sd-fill');
+        var time = lane.el.querySelector('[data-time]');
+        var start = performance.now();
+
+        var tick = function (now) {
+          var p = Math.min(1, (now - start) / lane.duration);
+          fill.style.height = (p * 100) + '%';
+          time.textContent = ((now - start) / 1000).toFixed(1) + 's';
+          if (p < 1) requestAnimationFrame(tick);
+          else finish(lane);
+        };
+        requestAnimationFrame(tick);
+      });
+
+      var longest = Math.max(lanes[0].duration, lanes[1].duration);
+      timers.push(setTimeout(function () {
+        runBtn.disabled = false;
+        runBtn.textContent = 'Run it again';
+      }, reduced ? 200 : longest + 150));
+    });
+  }
+
+  /* --- prep checklist ---------------------------------------------- */
+  var prep = document.getElementById('prep-list');
+  var prepCount = document.getElementById('prep-count');
+
+  if (prep && prepCount) {
+    var boxes = prep.querySelectorAll('input[type="checkbox"]');
+
+    prep.addEventListener('change', function () {
+      var done = 0;
+      boxes.forEach(function (b) { if (b.checked) done++; });
+
+      if (done === 0) {
+        prepCount.textContent = 'Nothing ticked yet.';
+      } else if (done === boxes.length) {
+        prepCount.textContent = 'All seven ready. You are in unusually good shape \u2014 send the form.';
+      } else {
+        prepCount.textContent = done + ' of ' + boxes.length + ' ready. That is plenty to start with.';
+      }
+    });
+  }
+
   /* --- current year ----------------------------------------------- */
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
