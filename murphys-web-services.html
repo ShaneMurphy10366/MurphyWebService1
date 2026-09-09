@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Murphy's Web Services — Websites with things that move</title>
+<meta name="description" content="Custom websites for businesses across South Florida. Interactive, fast, and built to be remembered.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0B0620;
+  --deep:#120A2E;
+  --panel:#180E3C;
+  --line:#2E1F63;
+  --line-hot:#4A2FA8;
+  --beam:#3AD8FF;
+  --violet:#A26BFF;
+  --magenta:#FF3D8A;
+  --text:#EFEAFF;
+  --muted:#A093CE;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+
+body{
+  margin:0;
+  background:var(--void);
+  color:var(--text);
+  font-family:Sora,system-ui,sans-serif;
+  font-weight:300;
+  font-size:1.0625rem;
+  line-height:1.65;
+  overflow-x:hidden;
+}
+
+/* the field of geometry behind everything */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(74,47,168,.16) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(74,47,168,.16) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 20%,transparent 75%);
+  pointer-events:none;
+  z-index:0;
+}
+
+h1,h2,h3{
+  font-family:Unbounded,system-ui,sans-serif;
+  line-height:1.05;
+  letter-spacing:-0.035em;
+  margin:0;
+  font-weight:800;
+}
+
+h1{font-size:clamp(2.5rem,7vw,5.5rem);}
+h2{font-size:clamp(1.9rem,4.2vw,3.1rem);}
+h3{font-size:1.02rem;font-weight:600;letter-spacing:-0.01em;}
+
+p{margin:0 0 1rem;max-width:36rem;}
+
+a{color:var(--beam);}
+
+.wrap{
+  width:min(76rem,100% - 2.5rem);
+  margin-inline:auto;
+  position:relative;
+  z-index:1;
+}
+
+section{padding-block:clamp(4rem,9vw,7.5rem);position:relative;z-index:1;}
+
+:focus-visible{outline:2px solid var(--beam);outline-offset:4px;}
+
+/* ============ header ============ */
+
+.bar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  backdrop-filter:blur(14px);
+  background:rgba(11,6,32,.72);
+  border-bottom:1px solid var(--line);
+}
+
+.bar .wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding-block:1rem;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:.65rem;
+  text-decoration:none;
+  color:var(--text);
+  font-family:Unbounded,sans-serif;
+  font-weight:600;
+  font-size:.98rem;
+  letter-spacing:-.02em;
+}
+
+.logo svg{flex:none;}
+
+.call{
+  font-family:Unbounded,sans-serif;
+  font-weight:600;
+  font-size:.85rem;
+  letter-spacing:-.01em;
+  text-decoration:none;
+  color:var(--void);
+  background:linear-gradient(100deg,var(--beam),var(--violet));
+  padding:.6rem 1.1rem;
+  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+  white-space:nowrap;
+}
+
+.call:hover{filter:brightness(1.12);}
+
+/* ============ hero ============ */
+
+.hero{
+  padding-top:clamp(3.5rem,8vw,6.5rem);
+  padding-bottom:clamp(4rem,8vw,7rem);
+  overflow:hidden;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:clamp(3rem,6vw,4.5rem);
+  align-items:center;
+}
+
+@media(min-width:64rem){
+  .hero-grid{grid-template-columns:1.08fr .92fr;}
+}
+
+.hero h1 .beam{
+  background:linear-gradient(96deg,var(--beam),var(--violet) 55%,var(--magenta));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  font-size:1.18rem;
+  color:var(--muted);
+  margin-top:1.6rem;
+  max-width:32rem;
+}
+
+.hero-cta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.85rem;
+  margin-top:2.2rem;
+}
+
+.btn{
+  font-family:Unbounded,sans-serif;
+  font-weight:600;
+  font-size:.92rem;
+  letter-spacing:-.01em;
+  text-decoration:none;
+  padding:.95rem 1.6rem;
+  border:none;
+  cursor:pointer;
+  display:inline-block;
+  color:var(--void);
+  background:linear-gradient(100deg,var(--beam),var(--violet));
+  clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+}
+
+.btn:hover{filter:brightness(1.12);}
+
+.btn-ghost{
+  background:transparent;
+  color:var(--text);
+  box-shadow:inset 0 0 0 1px var(--line-hot);
+}
+
+.btn-ghost:hover{background:rgba(162,107,255,.12);filter:none;}
+
+/* the rotating polyhedron */
+
+.rig{
+  position:relative;
+  aspect-ratio:1;
+  max-width:32rem;
+  margin-inline:auto;
+  width:100%;
+}
+
+.rig svg{width:100%;height:100%;overflow:visible;}
+
+.spin-slow{transform-origin:250px 250px;animation:spin 44s linear infinite;}
+.spin-fast{transform-origin:250px 250px;animation:spin 26s linear infinite reverse;}
+.pulse{animation:pulse 6s ease-in-out infinite;}
+
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes pulse{0%,100%{opacity:.32;}50%{opacity:.9;}}
+
+/* ============ section headings ============ */
+
+.head{max-width:44rem;margin-bottom:clamp(2.5rem,5vw,3.5rem);}
+.head p{color:var(--muted);margin-top:1.1rem;font-size:1.08rem;}
+
+.rule{
+  height:1px;
+  background:linear-gradient(90deg,var(--beam),var(--violet),transparent);
+  margin-bottom:1.6rem;
+  max-width:9rem;
+}
+
+/* ============ live feature demos ============ */
+
+.demos{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.25rem;
+}
+
+@media(min-width:46rem){.demos{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:70rem){.demos{grid-template-columns:repeat(3,1fr);}}
+
+.demo{
+  position:relative;
+  background:linear-gradient(160deg,var(--panel),var(--deep));
+  box-shadow:inset 0 0 0 1px var(--line);
+  padding:1.5rem;
+  min-height:19rem;
+  display:flex;
+  flex-direction:column;
+  clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px);
+}
+
+.demo:hover{box-shadow:inset 0 0 0 1px var(--line-hot);}
+
+.demo h3{margin-bottom:.4rem;}
+
+.demo > p{
+  font-size:.92rem;
+  color:var(--muted);
+  margin:0 0 1.1rem;
+  max-width:none;
+}
+
+.stage{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  background:rgba(11,6,32,.55);
+  box-shadow:inset 0 0 0 1px var(--line);
+  overflow:hidden;
+  min-height:9rem;
+}
+
+.hint{
+  position:absolute;
+  bottom:.5rem;
+  right:.65rem;
+  font-size:.68rem;
+  color:var(--muted);
+  letter-spacing:.02em;
+  pointer-events:none;
+}
+
+/* demo 1: tilt */
+.tilt-card{
+  width:73%;
+  aspect-ratio:5/3;
+  background:linear-gradient(135deg,rgba(58,216,255,.22),rgba(255,61,138,.22));
+  box-shadow:inset 0 0 0 1px var(--line-hot);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:Unbounded,sans-serif;
+  font-size:.8rem;
+  transition:transform .12s ease-out;
+  transform-style:preserve-3d;
+}
+
+/* demo 2: magnetic */
+.mag{
+  font-family:Unbounded,sans-serif;
+  font-size:.82rem;
+  font-weight:600;
+  color:var(--void);
+  background:linear-gradient(100deg,var(--beam),var(--violet));
+  border:none;
+  padding:.85rem 1.5rem;
+  cursor:pointer;
+  transition:transform .18s cubic-bezier(.2,.9,.3,1);
+}
+
+/* demo 3: counters */
+.counters{
+  display:flex;
+  gap:1.4rem;
+  text-align:center;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.counters b{
+  display:block;
+  font-family:Unbounded,sans-serif;
+  font-size:1.75rem;
+  font-weight:800;
+  letter-spacing:-.04em;
+  background:linear-gradient(100deg,var(--beam),var(--violet));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.counters span{font-size:.72rem;color:var(--muted);}
+
+/* demo 4: constellation */
+#net{width:100%;height:100%;display:block;}
+
+/* demo 5: filter grid */
+.chips{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.6rem;justify-content:center;}
+
+.chip{
+  font-family:Sora,sans-serif;
+  font-size:.68rem;
+  padding:.3rem .6rem;
+  background:transparent;
+  color:var(--muted);
+  border:1px solid var(--line-hot);
+  cursor:pointer;
+}
+
+.chip[aria-pressed="true"]{background:var(--violet);color:var(--void);border-color:var(--violet);}
+
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:.3rem;width:82%;}
+
+.tile{
+  aspect-ratio:1;
+  background:rgba(58,216,255,.2);
+  box-shadow:inset 0 0 0 1px var(--line-hot);
+  transition:opacity .3s ease,transform .3s ease;
+}
+
+.tile[data-kind="b"]{background:rgba(255,61,138,.2);}
+.tile[data-kind="c"]{background:rgba(162,107,255,.24);}
+.tile.off{opacity:.12;transform:scale(.82);}
+
+.stage-col{flex-direction:column;gap:.5rem;padding:.8rem;}
+
+/* demo 6: reveal on scroll */
+.reveal-demo span{
+  display:block;
+  height:.55rem;
+  background:linear-gradient(90deg,var(--beam),transparent);
+  margin-bottom:.5rem;
+  opacity:0;
+  transform:translateX(-24px);
+  transition:opacity .6s ease,transform .6s cubic-bezier(.2,.9,.3,1);
+}
+
+.reveal-demo.on span{opacity:1;transform:none;}
+.reveal-demo.on span:nth-child(2){transition-delay:.1s;}
+.reveal-demo.on span:nth-child(3){transition-delay:.2s;}
+.reveal-demo.on span:nth-child(4){transition-delay:.3s;}
+.reveal-demo span:nth-child(2){width:78%;}
+.reveal-demo span:nth-child(3){width:56%;}
+.reveal-demo span:nth-child(4){width:88%;}
+.reveal-demo{width:80%;}
+
+/* demo 7: before/after */
+.ba{position:relative;width:100%;height:100%;overflow:hidden;}
+.ba-half{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:Unbounded,sans-serif;font-size:.78rem;}
+.ba-old{background:#1B2233;color:#6E7A93;}
+.ba-new{
+  background:linear-gradient(135deg,rgba(58,216,255,.3),rgba(162,107,255,.3));
+  color:var(--text);
+  clip-path:inset(0 0 0 var(--sp,50%));
+}
+.ba-line{position:absolute;top:0;bottom:0;left:var(--sp,50%);width:2px;background:var(--beam);pointer-events:none;}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:ew-resize;}
+
+/* demo 8: accordion */
+.acc{width:86%;}
+.acc button{
+  width:100%;
+  text-align:left;
+  background:transparent;
+  border:none;
+  border-bottom:1px solid var(--line);
+  color:var(--text);
+  font-family:Sora,sans-serif;
+  font-size:.8rem;
+  padding:.55rem .2rem;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  gap:.5rem;
+}
+.acc button i{font-style:normal;color:var(--beam);transition:transform .25s ease;}
+.acc button[aria-expanded="true"] i{transform:rotate(45deg);}
+.acc div{
+  overflow:hidden;
+  max-height:0;
+  transition:max-height .3s ease;
+  font-size:.74rem;
+  color:var(--muted);
+  padding-inline:.2rem;
+}
+.acc div.open{max-height:6rem;padding-block:.4rem;}
+
+/* demo 9: ticker */
+.ticker{width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);}
+.ticker-run{display:flex;gap:1.5rem;width:max-content;animation:run 18s linear infinite;font-family:Unbounded,sans-serif;font-size:.82rem;color:var(--muted);}
+@keyframes run{to{transform:translateX(-50%);}}
+
+/* ============ industries ============ */
+
+.industries{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));
+  gap:1px;
+  background:var(--line);
+  box-shadow:0 0 0 1px var(--line);
+}
+
+.ind{
+  background:var(--void);
+  padding:1.6rem 1.3rem;
+  min-height:9.5rem;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:background .25s ease;
+}
+
+.ind:hover{background:var(--deep);}
+
+.ind svg{color:var(--beam);margin-bottom:1rem;}
+.ind:nth-child(3n+2) svg{color:var(--violet);}
+.ind:nth-child(3n+3) svg{color:var(--magenta);}
+
+.ind b{
+  font-family:Unbounded,sans-serif;
+  font-size:.92rem;
+  font-weight:600;
+  letter-spacing:-.02em;
+  display:block;
+}
+
+.ind small{color:var(--muted);font-size:.78rem;line-height:1.45;display:block;margin-top:.3rem;}
+
+.ind-note{color:var(--muted);margin-top:2rem;font-size:.98rem;}
+
+/* ============ closing ============ */
+
+.close-band{
+  background:linear-gradient(140deg,var(--deep),var(--void) 70%);
+  border-block:1px solid var(--line);
+  text-align:center;
+}
+
+.close-band .wrap{display:flex;flex-direction:column;align-items:center;}
+
+.close-band p{color:var(--muted);font-size:1.12rem;margin-top:1.2rem;}
+
+.big-call{
+  font-family:Unbounded,sans-serif;
+  font-weight:800;
+  font-size:clamp(1.6rem,5vw,2.9rem);
+  letter-spacing:-.04em;
+  text-decoration:none;
+  margin-top:1.8rem;
+  display:inline-block;
+  background:linear-gradient(96deg,var(--beam),var(--violet) 55%,var(--magenta));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+footer{
+  padding-block:2.2rem;
+  border-top:1px solid var(--line);
+  font-size:.86rem;
+  color:var(--muted);
+}
+
+footer .wrap{display:flex;flex-wrap:wrap;gap:.8rem 2rem;justify-content:space-between;align-items:center;}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;}
+  .reveal-demo span{opacity:1;transform:none;}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="#top">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <path d="M13 1L24.3 7.5v11L13 25 1.7 18.5v-11L13 1z" stroke="url(#lg)" stroke-width="1.4"/>
+        <path d="M13 7l6.1 3.5v7L13 21l-6.1-3.5v-7L13 7z" fill="url(#lg)" fill-opacity=".28"/>
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="26" y2="26">
+          <stop stop-color="#3AD8FF"/><stop offset="1" stop-color="#FF3D8A"/>
+        </linearGradient></defs>
+      </svg>
+      Murphy's Web Services
+    </a>
+    <a class="call" href="tel:+19543364261">954-336-4261</a>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Websites that <span class="beam">do something</span> when you look at them.</h1>
+      <p>Most small business sites are a brochure that sits there. I build the other kind — sites with motion, depth, and interaction that make someone stay long enough to call you.</p>
+      <div class="hero-cta">
+        <a class="btn" href="tel:+19543364261">Call 954-336-4261</a>
+        <a class="btn btn-ghost" href="#features">See what I can build</a>
+      </div>
+    </div>
+
+    <div class="rig">
+      <svg viewBox="0 0 500 500" role="img" aria-label="Rotating geometric wireframe">
+        <defs>
+          <linearGradient id="edge" x1="0" y1="0" x2="500" y2="500">
+            <stop stop-color="#3AD8FF"/><stop offset=".5" stop-color="#A26BFF"/><stop offset="1" stop-color="#FF3D8A"/>
+          </linearGradient>
+          <radialGradient id="glow" cx="50%" cy="50%">
+            <stop stop-color="#A26BFF" stop-opacity=".38"/>
+            <stop offset="1" stop-color="#A26BFF" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <circle cx="250" cy="250" r="230" fill="url(#glow)"/>
+
+        <g class="spin-slow" stroke="url(#edge)" fill="none">
+          <polygon points="250,40 431,145 431,355 250,460 69,355 69,145" stroke-width="1.4" opacity=".85"/>
+          <polygon points="250,105 374,177 374,323 250,395 126,323 126,177" stroke-width="1" opacity=".5"/>
+          <line x1="250" y1="40" x2="250" y2="460" stroke-width=".8" opacity=".35"/>
+          <line x1="69" y1="145" x2="431" y2="355" stroke-width=".8" opacity=".35"/>
+          <line x1="431" y1="145" x2="69" y2="355" stroke-width=".8" opacity=".35"/>
+        </g>
+
+        <g class="spin-fast" stroke="url(#edge)" fill="none">
+          <polygon points="250,150 337,200 337,300 250,350 163,300 163,200" stroke-width="1.6"/>
+          <polygon points="250,190 302,220 302,280 250,310 198,280 198,220" stroke-width="1" opacity=".7"/>
+        </g>
+
+        <g fill="url(#edge)" class="pulse">
+          <circle cx="250" cy="40" r="4"/><circle cx="431" cy="145" r="4"/>
+          <circle cx="431" cy="355" r="4"/><circle cx="250" cy="460" r="4"/>
+          <circle cx="69" cy="355" r="4"/><circle cx="69" cy="145" r="4"/>
+        </g>
+
+        <circle cx="250" cy="250" r="26" fill="url(#edge)" opacity=".9"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="head">
+      <div class="rule"></div>
+      <h2>Things I can build into your site</h2>
+      <p>Every panel below is live. Touch it, drag it, hover it — this is the actual code, not a screenshot of a feature list.</p>
+    </div>
+
+    <div class="demos">
+
+      <article class="demo">
+        <h3>Depth on hover</h3>
+        <p>Cards and product tiles that tilt toward the cursor. Small effect, hard to stop playing with.</p>
+        <div class="stage" id="tiltStage">
+          <div class="tilt-card" id="tiltCard">Move your cursor</div>
+          <span class="hint">hover</span>
+        </div>
+      </article>
+
+      <article class="demo">
+        <h3>Buttons that reach back</h3>
+        <p>Your main call-to-action pulls toward the cursor as it gets close. People click it more.</p>
+        <div class="stage" id="magStage">
+          <button class="mag" id="magBtn" type="button">Book now</button>
+          <span class="hint">hover</span>
+        </div>
+      </article>
+
+      <article class="demo">
+        <h3>Numbers that count up</h3>
+        <p>Years in business, jobs completed, clients served — animated the moment they scroll into view.</p>
+        <div class="stage">
+          <div class="counters" id="counters">
+            <div><b data-to="428">0</b><span>Jobs done</span></div>
+            <div><b data-to="19">0</b><span>Years</span></div>
+            <div><b data-to="97" data-suffix="%">0</b><span>Repeat rate</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="demo">
+        <h3>Living backgrounds</h3>
+        <p>A generative particle field that reacts to the cursor. Sits behind your hero without slowing anything down.</p>
+        <div class="stage">
+          <canvas id="net"></canvas>
+          <span class="hint">move cursor</span>
+        </div>
+      </article>
+
+      <article class="demo">
+        <h3>Instant filtering</h3>
+        <p>Galleries and service menus that sort themselves as the visitor taps, with no page reload.</p>
+        <div class="stage stage-col">
+          <div class="chips" id="chips">
+            <button class="chip" data-f="all" aria-pressed="true" type="button">All</button>
+            <button class="chip" data-f="a" aria-pressed="false" type="button">Interiors</button>
+            <button class="chip" data-f="b" aria-pressed="false" type="button">Exteriors</button>
+            <button class="chip" data-f="c" aria-pressed="false" type="button">Repairs</button>
+          </div>
+          <div class="tiles" id="tiles"></div>
+        </div>
+      </article>
+
+      <article class="demo">
+        <h3>Before and after</h3>
+        <p>Drag-to-compare sliders. Contractors, detailers, and anyone selling a visible transformation.</p>
+        <div class="stage">
+          <div class="ba">
+            <div class="ba-half ba-old">Before</div>
+            <div class="ba-half ba-new" id="baNew">After</div>
+            <div class="ba-line" id="baLine"></div>
+            <input id="baRange" type="range" min="0" max="100" value="50" aria-label="Compare before and after">
+          </div>
+          <span class="hint">drag</span>
+        </div>
+      </article>
+
+      <article class="demo">
+        <h3>Reveal on scroll</h3>
+        <p>Content that arrives as the visitor moves down the page instead of dumping everything at once.</p>
+        <div class="stage">
+          <div class="reveal-demo" id="revealDemo"><span></span><span></span><span></span><span></span></div>
+        </div>
+      </article>
+
+      <article class="demo">
+        <h3>Expanding answers</h3>
+        <p>Smooth accordions for FAQs, service details, and pricing tiers — long pages that stay short.</p>
+        <div class="stage">
+          <div class="acc" id="acc">
+            <button type="button" aria-expanded="false">Do you serve my area?<i>+</i></button>
+            <div>All of Broward, Miami-Dade, and Palm Beach.</div>
+            <button type="button" aria-expanded="false">How fast can you start?<i>+</i></button>
+            <div>Most projects begin within a week of the first call.</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="demo">
+        <h3>Scrolling marquees</h3>
+        <p>A continuous band of services, certifications, or brands you carry. Motion that reads as premium.</p>
+        <div class="stage">
+          <div class="ticker">
+            <div class="ticker-run" id="tickRun"></div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head">
+      <div class="rule"></div>
+      <h2>Industries I build for</h2>
+      <p>Different trades need different things. A pool company needs seasonal scheduling; a med spa needs a gallery that sells. I build for the way your business actually runs.</p>
+    </div>
+
+    <div class="industries">
+
+      <div class="ind">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <path d="M2 16c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2M2 20c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2"/>
+          <circle cx="8" cy="6" r="2"/><path d="M8 8v4M8 10h6v6"/>
+        </svg>
+        <div><b>Aquatics &amp; pools</b><small>Lifeguard staffing, pool service, swim schools, and certification courses.</small></div>
+      </div>
+
+      <div class="ind">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-7h6v7"/>
+        </svg>
+        <div><b>Contractors</b><small>Roofing, remodeling, concrete, and general construction.</small></div>
+      </div>
+
+      <div class="ind">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="12" rx="1"/><path d="M7 20h10M12 16v4M8 8h8M8 12h5"/>
+        </svg>
+        <div><b>HVAC &amp; plumbing</b><small>Emergency service, maintenance plans, and dispatch-driven sites.</small></div>
+      </div>
+
+      <div class="ind">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <path d="M12 3l2.4 5.2 5.6.7-4.1 3.9 1.1 5.6L12 15.7 6.9 18.4 8 12.8 3.9 8.9l5.7-.7L12 3z"/>
+        </svg>
+        <div><b>Med spas &amp; wellness</b><small>Treatment menus, before-and-after galleries, and online booking.</small></div>
+      </div>
+
+      <div class="ind">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <path d="M12 3v18M4 8h16M6 8l-3 7h6l-3-7zM18 8l-3 7h6l-3-7z"/>
+        </svg>
+        <div><b>Law &amp; professional</b><small>Attorneys, accountants, and consultants who sell on credibility.</small></div>
+      </div>
+
+      <div class="ind">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <path d="M4 20V9l8-5 8 5v11"/><path d="M4 20h16M10 20v-5h4v5"/><circle cx="12" cy="10" r="1.4"/>
+        </svg>
+        <div><b>Real estate</b><small>Listing showcases, agent profiles, and neighborhood pages.</small></div>
+      </div>
+
+      <div class="ind">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <path d="M6 3v8a3 3 0 006 0V3M9 11v10M18 3c-1.5 1.5-2 3-2 5v3h2v10"/>
+        </svg>
+        <div><b>Restaurants &amp; bars</b><small>Menus that update themselves, reservations, and event pages.</small></div>
+      </div>
+
+      <div class="ind">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <path d="M4 12h2M18 12h2M7 8v8M17 8v8M9 12h6"/><rect x="6" y="8" width="3" height="8" rx="1"/><rect x="15" y="8" width="3" height="8" rx="1"/>
+        </svg>
+        <div><b>Gyms &amp; studios</b><small>Class schedules, trainer bios, and membership signup flows.</small></div>
+      </div>
+
+      <div class="ind">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <path d="M12 21s7-5.2 7-10a7 7 0 10-14 0c0 4.8 7 10 7 10z"/><circle cx="12" cy="11" r="2.5"/>
+        </svg>
+        <div><b>Landscaping &amp; lawn</b><small>Seasonal service plans, project galleries, and quote requests.</small></div>
+      </div>
+
+      <div class="ind">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <path d="M3 13l2-6h14l2 6v5h-3v-2H6v2H3v-5z"/><circle cx="7.5" cy="15.5" r="1.2"/><circle cx="16.5" cy="15.5" r="1.2"/>
+        </svg>
+        <div><b>Auto &amp; detailing</b><small>Service menus, before-and-after work, and appointment booking.</small></div>
+      </div>
+
+      <div class="ind">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <path d="M12 4l8 4-8 4-8-4 8-4z"/><path d="M6 10v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/>
+        </svg>
+        <div><b>Camps &amp; schools</b><small>Enrollment, seasonal programs, and parent-facing information.</small></div>
+      </div>
+
+      <div class="ind">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>
+        </svg>
+        <div><b>Not on this list?</b><small>The build process is the same. Call and tell me what you do.</small></div>
+      </div>
+
+    </div>
+
+    <p class="ind-note">Based in Pembroke Pines and working across South Florida — plus anywhere else, since none of this requires being in the same room.</p>
+  </div>
+</section>
+
+<section class="close-band">
+  <div class="wrap">
+    <h2>Let's talk about your site.</h2>
+    <p>Call or text. Tell me what your business does and I'll tell you straight whether a new site is worth it.</p>
+    <a class="big-call" href="tel:+19543364261">954-336-4261</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Murphy's Web Services</span>
+    <span>Pembroke Pines, Florida</span>
+    <span><a href="tel:+19543364261">954-336-4261</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- tilt ---- */
+  var stage = document.getElementById('tiltStage'), card = document.getElementById('tiltCard');
+  stage.addEventListener('pointermove', function(e){
+    var r = stage.getBoundingClientRect();
+    var x = (e.clientX - r.left) / r.width - .5;
+    var y = (e.clientY - r.top) / r.height - .5;
+    card.style.transform = 'perspective(600px) rotateY(' + (x*26) + 'deg) rotateX(' + (-y*26) + 'deg) scale(1.05)';
+  });
+  stage.addEventListener('pointerleave', function(){ card.style.transform = ''; });
+
+  /* ---- magnetic button ---- */
+  var mStage = document.getElementById('magStage'), mBtn = document.getElementById('magBtn');
+  mStage.addEventListener('pointermove', function(e){
+    var r = mBtn.getBoundingClientRect();
+    var dx = e.clientX - (r.left + r.width/2);
+    var dy = e.clientY - (r.top + r.height/2);
+    var d = Math.hypot(dx,dy);
+    if (d < 150) mBtn.style.transform = 'translate(' + dx*.35 + 'px,' + dy*.35 + 'px)';
+    else mBtn.style.transform = '';
+  });
+  mStage.addEventListener('pointerleave', function(){ mBtn.style.transform = ''; });
+
+  /* ---- counters + scroll reveal ---- */
+  function countUp(el){
+    var to = +el.dataset.to, sfx = el.dataset.suffix || '', start = null, dur = 1400;
+    if (reduce){ el.textContent = to + sfx; return; }
+    function tick(t){
+      if (!start) start = t;
+      var p = Math.min((t - start)/dur, 1);
+      el.textContent = Math.round(to * (1 - Math.pow(1-p, 3))) + sfx;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (!en.isIntersecting) return;
+      if (en.target.id === 'counters'){
+        en.target.querySelectorAll('b').forEach(countUp);
+      } else {
+        en.target.classList.add('on');
+      }
+      io.unobserve(en.target);
+    });
+  }, { threshold: .4 });
+
+  io.observe(document.getElementById('counters'));
+  io.observe(document.getElementById('revealDemo'));
+
+  /* ---- constellation canvas ---- */
+  var cv = document.getElementById('net'), ctx = cv.getContext('2d');
+  var pts = [], mouse = {x:-999,y:-999}, W = 0, H = 0;
+
+  function size(){
+    var r = cv.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = r.width; H = r.height;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+
+  function seed(){
+    pts = [];
+    var n = Math.max(18, Math.round(W * H / 4200));
+    for (var i=0;i<n;i++) pts.push({
+      x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-.5)*.28, vy: (Math.random()-.5)*.28
+    });
+  }
+
+  cv.addEventListener('pointermove', function(e){
+    var r = cv.getBoundingClientRect();
+    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+  });
+  cv.addEventListener('pointerleave', function(){ mouse.x = mouse.y = -999; });
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for (var i=0;i<pts.length;i++){
+      var p = pts[i];
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+
+      var md = Math.hypot(p.x-mouse.x, p.y-mouse.y);
+      if (md < 90){
+        ctx.strokeStyle = 'rgba(255,61,138,' + (1 - md/90) * .5 + ')';
+        ctx.lineWidth = .8;
+        ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(mouse.x,mouse.y); ctx.stroke();
+      }
+
+      for (var j=i+1;j<pts.length;j++){
+        var q = pts[j], d = Math.hypot(p.x-q.x, p.y-q.y);
+        if (d < 78){
+          ctx.strokeStyle = 'rgba(58,216,255,' + (1 - d/78) * .34 + ')';
+          ctx.lineWidth = .7;
+          ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
+        }
+      }
+
+      ctx.fillStyle = 'rgba(162,107,255,.85)';
+      ctx.beginPath(); ctx.arc(p.x,p.y,1.5,0,Math.PI*2); ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  size(); seed();
+  if (!reduce) draw(); else { seed(); }
+  window.addEventListener('resize', function(){ size(); seed(); });
+
+  /* ---- filter grid ---- */
+  var kinds = ['a','b','c'], tiles = document.getElementById('tiles');
+  for (var i=0;i<12;i++){
+    var t = document.createElement('div');
+    t.className = 'tile';
+    t.dataset.kind = kinds[i % 3];
+    tiles.appendChild(t);
+  }
+  document.getElementById('chips').addEventListener('click', function(e){
+    var b = e.target.closest('.chip'); if (!b) return;
+    this.querySelectorAll('.chip').forEach(function(c){ c.setAttribute('aria-pressed', c === b); });
+    var f = b.dataset.f;
+    tiles.querySelectorAll('.tile').forEach(function(t){
+      t.classList.toggle('off', f !== 'all' && t.dataset.kind !== f);
+    });
+  });
+
+  /* ---- before / after ---- */
+  var baR = document.getElementById('baRange'), baN = document.getElementById('baNew'), baL = document.getElementById('baLine');
+  function baUpdate(){
+    var v = baR.value + '%';
+    baN.style.setProperty('--sp', v);
+    baL.style.setProperty('--sp', v);
+  }
+  baR.addEventListener('input', baUpdate); baUpdate();
+
+  /* ---- accordion ---- */
+  document.getElementById('acc').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    var open = b.getAttribute('aria-expanded') === 'true';
+    b.setAttribute('aria-expanded', !open);
+    b.nextElementSibling.classList.toggle('open', !open);
+  });
+
+  /* ---- ticker ---- */
+  var items = ['Emergency service','Licensed &amp; insured','Free estimates','Same-day repairs','20 years local','Financing available'];
+  var run = document.getElementById('tickRun');
+  run.innerHTML = (items.join('<span style="color:#FF3D8A">/</span>') + '<span style="color:#FF3D8A">/</span>').repeat(2);
+})();
+</script>
+
+</body>
+</html>
