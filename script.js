@@ -20,6 +20,13 @@
       });
       paint.setAttribute('fill', b.dataset.c);
       if (name) name.textContent = b.dataset.n;
+
+      // tint the glow behind the car to match the paint
+      var hex = b.dataset.c.replace('#','');
+      var r = parseInt(hex.substr(0,2),16),
+          g = parseInt(hex.substr(2,2),16),
+          bl = parseInt(hex.substr(4,2),16);
+      cfg.style.setProperty('--paint-glow','rgba('+r+','+g+','+bl+',.5)');
     });
   });
 
@@ -84,7 +91,7 @@
     }
   })();
 
-  /* ---------- scroll-triggered animations ---------- */
+  /* ---------- looping animations (only while on screen) ---------- */
   function countTo(el, to, dur){
     if (!el) return;
     if (reduce){ el.textContent = to; return; }
@@ -98,30 +105,89 @@
     requestAnimationFrame(tick);
   }
 
-  var targets = ['dyno','gauge','revealDemo']
-    .map(function(id){ return document.getElementById(id); })
-    .filter(Boolean);
+  /* Runs `fn` on an interval, but only while `el` is visible.
+     Keeps the loop off the CPU when the panel is scrolled away. */
+  function loopWhileVisible(el, fn, period){
+    if (!el) return;
+    var timer = null;
 
-  function activate(el){
-    el.classList.add('on');
-    if (el.id === 'dyno'){
+    function start(){
+      if (timer) return;
+      fn();
+      timer = setInterval(fn, period);
+    }
+    function stop(){
+      if (!timer) return;
+      clearInterval(timer);
+      timer = null;
+    }
+
+    if (reduce){ fn(); return; }
+
+    if ('IntersectionObserver' in window){
+      new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ en.isIntersecting ? start() : stop(); });
+      }, { threshold: 0.25 }).observe(el);
+    } else {
+      start();
+    }
+
+    // pause everything when the tab is in the background
+    document.addEventListener('visibilitychange', function(){
+      document.hidden ? stop() : (isVisible(el) && start());
+    });
+  }
+
+  function isVisible(el){
+    var r = el.getBoundingClientRect();
+    return r.bottom > 0 && r.top < window.innerHeight;
+  }
+
+  /* dyno: curves redraw and the numbers re-count every cycle.
+     Toggling a class gets coalesced by the browser, so drive the stroke directly. */
+  (function(){
+    var dyno = document.getElementById('dyno');
+    if (!dyno) return;
+    var curves = dyno.querySelectorAll('path.curve');
+    if (!curves.length) return;
+
+    dyno.classList.add('on');
+
+    loopWhileVisible(dyno, function(){
+      curves.forEach(function(path, i){
+        path.style.transition = 'none';
+        path.style.strokeDashoffset = '520';
+        void path.getBoundingClientRect();        // flush the reset before animating
+        path.style.transition = 'stroke-dashoffset 1.8s cubic-bezier(.3,.8,.4,1)';
+        path.style.transitionDelay = (i * 0.25) + 's';
+        path.style.strokeDashoffset = '0';
+      });
       countTo(document.getElementById('hpVal'), 487, 1800);
       countTo(document.getElementById('tqVal'), 412, 1800);
-    }
-  }
+    }, 5200);
+  })();
 
-  if ('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if (!en.isIntersecting) return;
-        activate(en.target);
-        io.unobserve(en.target);
-      });
-    }, { threshold: 0.25, rootMargin: '0px 0px -10% 0px' });
-    targets.forEach(function(el){ io.observe(el); });
-  } else {
-    targets.forEach(activate);          // fallback: just show them
-  }
+  /* gauge: needle sweeps up, holds, falls back, repeats */
+  (function(){
+    var gauge = document.getElementById('gauge');
+    if (!gauge) return;
+    var up = false;
+    loopWhileVisible(gauge, function(){
+      up = !up;
+      gauge.classList.toggle('on', up);
+    }, 2600);
+  })();
+
+  /* reveal bars: replay the stagger on a loop */
+  (function(){
+    var rev = document.getElementById('revealDemo');
+    if (!rev) return;
+    var shown = false;
+    loopWhileVisible(rev, function(){
+      shown = !shown;
+      rev.classList.toggle('on', shown);
+    }, 2400);
+  })();
 
   /* ---------- before / after slider ---------- */
   (function(){
@@ -177,6 +243,66 @@
       var panel = b.nextElementSibling;
       if (panel) panel.classList.toggle('open', !open);
     });
+  })();
+
+  /* ---------- design directions gallery ---------- */
+  (function(){
+    var tabs = document.getElementById('lookTabs');
+    var note = document.getElementById('lookNote');
+    if (!tabs) return;
+
+    var mocks = document.querySelectorAll('.mock');
+
+    var notes = {
+      tuner:   '<b>JDM / Tuner.</b> Italic condensed caps, a technical grid, and neon on near-black. Built for shops selling power to people who read spec sheets for fun.',
+      luxury:  '<b>Luxury dealer.</b> Champagne on charcoal, an italic serif, and a lot of empty space. Restraint is the whole message — the cars do the talking.',
+      classic: '<b>Restoration.</b> Warm paper, oxblood, and a period serif. Feels like a workshop that has been there forty years, because that is what it is selling.',
+      detail:  '<b>Detail shop.</b> Bright, glossy, and high contrast, with pill buttons and soft shadows. Clean reads as clean.'
+    };
+
+    function show(key){
+      mocks.forEach(function(m){ m.classList.toggle('on', m.dataset.look === key); });
+      tabs.querySelectorAll('button').forEach(function(b){
+        b.setAttribute('aria-selected', b.dataset.look === key ? 'true' : 'false');
+      });
+      if (note) note.innerHTML = notes[key] || '';
+    }
+
+    tabs.addEventListener('click', function(e){
+      var b = e.target.closest('button');
+      if (!b || !tabs.contains(b)) return;
+      show(b.dataset.look);
+    });
+
+    // arrow keys move between tabs
+    tabs.addEventListener('keydown', function(e){
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      var btns = Array.prototype.slice.call(tabs.querySelectorAll('button'));
+      var i = btns.indexOf(document.activeElement);
+      if (i < 0) return;
+      var next = btns[(i + (e.key === 'ArrowRight' ? 1 : -1) + btns.length) % btns.length];
+      next.focus(); show(next.dataset.look); e.preventDefault();
+    });
+
+    show('tuner');
+  })();
+
+  /* ---------- scroll progress bar ---------- */
+  (function(){
+    var bar = document.getElementById('progress');
+    if (!bar) return;
+    var ticking = false;
+    function update(){
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+      bar.style.width = Math.min(pct, 100) + '%';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if (!ticking){ requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
   })();
 
   /* ---------- services ticker ---------- */
