@@ -3,468 +3,412 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Murphy's Productions — websites built for small businesses</title>
-<meta name="description" content="Murphy's Productions builds fast, good-looking websites for small businesses. Design, build, launch, and ongoing care from one small team.">
-<meta name="theme-color" content="#17162B">
-
-<meta property="og:title" content="Murphy's Productions">
-<meta property="og:description" content="Websites built for small businesses. Design, build, launch, and ongoing care from one small team.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="og.svg">
-
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Murphy's Web Services — Websites for the automotive industry</title>
+<meta name="description" content="Custom websites for shops, dealers, detailers, and tuners across South Florida. Built by someone who cares how it looks.">
+<meta name="theme-color" content="#0E1114">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,600;75..125,800&family=Barlow:wght@300;400;500;600&family=Chakra+Petch:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<a class="skip" href="#main">Skip to content</a>
-
-<header class="topbar">
-  <a class="mark" href="#top">
-    <span class="mark-glyph" aria-hidden="true">
-      <svg viewBox="0 0 32 32" width="32" height="32"><rect x="1.5" y="1.5" width="29" height="29" rx="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 23V10l8 8 8-8v13" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" stroke-linejoin="miter"/></svg>
-    </span>
-    <span class="mark-text">Murphy's Productions</span>
-  </a>
-  <nav class="topnav" aria-label="Main">
-    <a href="#services">What we build</a>
-    <a href="#process">How it works</a>
-    <a href="#care">After launch</a>
-    <a href="#about">About</a>
-    <a class="btn btn-small" href="#start">Start a project</a>
-  </nav>
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="#top">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <path d="M14 2l11 6.5v11L14 26 3 19.5v-11L14 2z" stroke="#FF5C1A" stroke-width="1.5"/>
+        <path d="M9 18V10l5 5 5-5v8" stroke="#F2F4F7" stroke-width="1.8" stroke-linejoin="round"/>
+      </svg>
+      Murphy's<br>Web Services
+    </a>
+    <a class="pill" href="tel:+19543364261">954-336-4261</a>
+  </div>
 </header>
 
-<main id="main">
+<main id="top">
 
-  <section class="hero" id="top">
-    <div class="hero-copy">
-      <h1>We turn the sketch<br>into the real thing.</h1>
-      <p class="lede">Murphy's Productions is a small studio that designs and builds websites for small businesses. You get a site that loads fast, reads clearly, and can be updated without calling anyone.</p>
-      <div class="hero-actions">
-        <a class="btn" href="#start">Start a project</a>
-        <a class="btn btn-ghost" href="#services">See what we build</a>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="tag">Websites for the automotive industry</span>
+      <h1>Your work looks <em>incredible</em>. Your website doesn't.</h1>
+      <p class="lede">I build sites for shops, dealers, detailers, and tuners — designed for people who notice panel gaps and stance. If your cars deserve better than a stock template, we should talk.</p>
+      <div class="hero-cta">
+        <a class="btn" href="tel:+19543364261">Call 954-336-4261</a>
+        <a class="btn btn-ghost" href="#build">See what I build</a>
       </div>
     </div>
 
-    <figure class="reveal" id="reveal">
-      <figcaption class="reveal-cap">Drag to see a rough layout become a finished page.</figcaption>
+    <div class="rig">
+      <div class="car-stage">
+        <svg viewBox="0 0 420 200" role="img" aria-label="Side profile of a car that changes paint color">
+          <defs>
+            <linearGradient id="paintGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#fff" stop-opacity=".28"/>
+              <stop offset=".45" stop-color="#fff" stop-opacity="0"/>
+              <stop offset="1" stop-color="#000" stop-opacity=".35"/>
+            </linearGradient>
+            <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#4A5A68"/><stop offset="1" stop-color="#151A20"/>
+            </linearGradient>
+          </defs>
 
-      <div class="reveal-stage">
-        <!-- finished state, sits underneath -->
-        <div class="frame frame-done" aria-hidden="true">
-          <div class="fd-bar"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
-          <div class="fd-body">
-            <div class="fd-nav"><b>Ridgeway Bakery</b><i></i><i></i><i></i><em>Order</em></div>
-            <div class="fd-hero">
-              <div class="fd-hero-text">
-                <strong>Bread, baked this morning.</strong>
-                <span>Pick up on Grand Ave until 3pm.</span>
-                <u>Order today's loaves</u>
-              </div>
-              <div class="fd-hero-art"></div>
-            </div>
-            <div class="fd-cards"><div></div><div></div><div></div></div>
+          <ellipse cx="210" cy="186" rx="176" ry="9" fill="#000" opacity=".45"/>
+
+          <path id="paint" d="M20,152 L22,126 C26,113 46,104 74,100 L114,60 C124,48 142,42 168,42 L246,42 C274,42 288,48 298,60 L328,98 C358,102 380,110 392,121 C400,129 402,141 400,152 Z" fill="#FF5C1A"/>
+          <path d="M20,152 L22,126 C26,113 46,104 74,100 L114,60 C124,48 142,42 168,42 L246,42 C274,42 288,48 298,60 L328,98 C358,102 380,110 392,121 C400,129 402,141 400,152 Z" fill="url(#paintGrad)"/>
+
+          <path d="M126,96 L158,58 C164,52 174,50 188,50 L200,50 L200,96 Z" fill="url(#glassGrad)"/>
+          <path d="M210,96 L210,50 L242,50 C258,50 268,54 274,62 L296,96 Z" fill="url(#glassGrad)"/>
+
+          <path d="M22,132 L78,128" stroke="#000" stroke-opacity=".35" stroke-width="2"/>
+          <path d="M336,126 L392,126" stroke="#000" stroke-opacity=".3" stroke-width="2"/>
+          <rect x="24" y="118" width="20" height="7" rx="2" fill="#FFE9B0" opacity=".9"/>
+          <rect x="378" y="116" width="18" height="7" rx="2" fill="#FF3B30" opacity=".85"/>
+          <path d="M92,152 L92,132" stroke="#000" stroke-opacity=".28" stroke-width="2"/>
+          <path d="M300,152 L300,130" stroke="#000" stroke-opacity=".28" stroke-width="2"/>
+          <path d="M140,150 L280,150 L272,158 L148,158 Z" fill="#000" opacity=".4"/>
+
+          <g>
+            <circle cx="110" cy="152" r="34" fill="#0B0D0F"/>
+            <circle cx="110" cy="152" r="33" fill="none" stroke="#2A333C" stroke-width="2"/>
+            <circle cx="110" cy="152" r="21" fill="#C9D1D9"/>
+            <circle cx="110" cy="152" r="21" fill="none" stroke="#8A959F" stroke-width="1.5"/>
+            <g stroke="#7C858E" stroke-width="2.4">
+              <path d="M110,133 L110,171M93,142 L127,162M93,162 L127,142"/>
+            </g>
+            <circle cx="110" cy="152" r="5" fill="#FF5C1A"/>
+          </g>
+          <g>
+            <circle cx="308" cy="152" r="34" fill="#0B0D0F"/>
+            <circle cx="308" cy="152" r="33" fill="none" stroke="#2A333C" stroke-width="2"/>
+            <circle cx="308" cy="152" r="21" fill="#C9D1D9"/>
+            <circle cx="308" cy="152" r="21" fill="none" stroke="#8A959F" stroke-width="1.5"/>
+            <g stroke="#7C858E" stroke-width="2.4">
+              <path d="M308,133 L308,171M291,142 L325,162M291,162 L325,142"/>
+            </g>
+            <circle cx="308" cy="152" r="5" fill="#FF5C1A"/>
+          </g>
+        </svg>
+
+        <div class="swatches" id="swatches">
+          <button class="sw" type="button" aria-pressed="true" style="background:#FF5C1A" data-c="#FF5C1A" data-n="Ignition Orange" aria-label="Ignition Orange"></button>
+          <button class="sw" type="button" aria-pressed="false" style="background:#B31217" data-c="#B31217" data-n="Rosso Corsa" aria-label="Rosso Corsa"></button>
+          <button class="sw" type="button" aria-pressed="false" style="background:#1C4FD8" data-c="#1C4FD8" data-n="Laguna Blue" aria-label="Laguna Blue"></button>
+          <button class="sw" type="button" aria-pressed="false" style="background:#0E7C5A" data-c="#0E7C5A" data-n="British Racing" aria-label="British Racing Green"></button>
+          <button class="sw" type="button" aria-pressed="false" style="background:#E8E9EB" data-c="#E8E9EB" data-n="Chalk White" aria-label="Chalk White"></button>
+          <button class="sw" type="button" aria-pressed="false" style="background:#3A4149" data-c="#3A4149" data-n="Nardo Grey" aria-label="Nardo Grey"></button>
+          <button class="sw" type="button" aria-pressed="false" style="background:#131518" data-c="#131518" data-n="Satin Black" aria-label="Satin Black"></button>
+          <button class="sw" type="button" aria-pressed="false" style="background:#C9A227" data-c="#C9A227" data-n="Sunburst Gold" aria-label="Sunburst Gold"></button>
+        </div>
+
+        <div class="sw-label">Paint &mdash; <span class="sw-name" id="swName">Ignition Orange</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="stat">
+      <b>Built for a phone in a garage</b>
+      <span>Your customer is standing next to the car when they search. Everything is sized for one thumb.</span>
+    </div>
+    <div class="stat">
+      <b>Your photos, treated properly</b>
+      <span>Shops shoot good work and then bury it in a template. Full-bleed galleries and comparisons, compressed so pages stay fast.</span>
+    </div>
+    <div class="stat">
+      <b>One tap to book</b>
+      <span>Call and text buttons on every screen, plus Google Maps set up so you show up when someone searches your town.</span>
+    </div>
+  </div>
+</div>
+
+<section id="build">
+  <div class="wrap">
+    <div class="head">
+      <span class="tag">Live modules</span>
+      <h2>Things I can build into your site</h2>
+      <p>Every panel below is running code, not a screenshot. Tap, drag, and swipe them — these are the actual features that go on your pages.</p>
+    </div>
+
+    <div class="demos">
+
+      <article class="demo">
+        <h3>Drag-to-spin wheels</h3>
+        <p>360-degree views for rims, wheels, and finished builds. Grab it and turn it the way they would in your showroom.</p>
+        <div class="stage">
+          <div class="rim-wrap" id="rimWrap">
+            <svg viewBox="0 0 200 200" role="img" aria-label="Drag to rotate the wheel">
+              <circle cx="100" cy="100" r="96" fill="#0B0D0F"/>
+              <circle cx="100" cy="100" r="95" fill="none" stroke="#2A333C" stroke-width="2"/>
+              <g id="rimSpin" style="transform-origin:100px 100px">
+                <circle cx="100" cy="100" r="70" fill="#C9D1D9"/>
+                <circle cx="100" cy="100" r="70" fill="none" stroke="#8A959F" stroke-width="2"/>
+                <g fill="#0B0D0F">
+                  <path d="M100 34 L112 62 Q100 58 88 62 Z"/>
+                  <path d="M157 67 L133 86 Q136 74 129 64 Z"/>
+                  <path d="M157 133 L129 136 Q136 126 133 114 Z"/>
+                  <path d="M100 166 L88 138 Q100 142 112 138 Z"/>
+                  <path d="M43 133 L67 114 Q64 126 71 136 Z"/>
+                  <path d="M43 67 L71 64 Q64 74 67 86 Z"/>
+                </g>
+                <circle cx="100" cy="100" r="26" fill="#8A959F"/>
+                <circle cx="100" cy="100" r="26" fill="none" stroke="#6B737B" stroke-width="1.5"/>
+                <circle cx="100" cy="100" r="10" fill="#FF5C1A"/>
+                <g fill="#4A525A">
+                  <circle cx="100" cy="82" r="3.4"/><circle cx="117" cy="94" r="3.4"/>
+                  <circle cx="110" cy="114" r="3.4"/><circle cx="90" cy="114" r="3.4"/>
+                  <circle cx="83" cy="94" r="3.4"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <span class="tap">drag</span>
+        </div>
+      </article>
+
+      <article class="demo">
+        <h3>Before and after</h3>
+        <p>Drag sliders for paint correction, ceramic coating, dent repair, restorations, and wraps. The best-converting thing a detail shop can put online.</p>
+        <div class="stage">
+          <div class="ba">
+            <div class="ba-half ba-old"><span>Before</span></div>
+            <div class="ba-half ba-new" id="baNew"><span>After</span></div>
+            <div class="ba-line" id="baLine"></div>
+            <input id="baRange" type="range" min="0" max="100" value="50" aria-label="Compare before and after">
+          </div>
+          <span class="tap">drag</span>
+        </div>
+      </article>
+
+      <article class="demo">
+        <h3>Dyno charts</h3>
+        <p>Power and torque curves that draw themselves as the page scrolls. For tuners who want the numbers to land, not sit in a JPEG.</p>
+        <div class="stage">
+          <div class="dyno" id="dyno">
+            <div class="dyno-read"><b id="hpVal">0</b> HP &nbsp;/&nbsp; <i id="tqVal">0</i> LB-FT</div>
+            <svg viewBox="0 0 260 140" aria-label="Power and torque curves">
+              <g stroke="#2A333C" stroke-width="1">
+                <path d="M30,118 H250M30,88 H250M30,58 H250M30,28 H250"/>
+                <path d="M30,20 V118M85,20 V118M140,20 V118M195,20 V118M250,20 V118"/>
+              </g>
+              <path class="curve" d="M30,116 C70,108 100,86 135,58 C170,32 205,26 250,24"
+                    fill="none" stroke="#FF5C1A" stroke-width="3" stroke-linecap="round"/>
+              <path class="curve" d="M30,104 C70,74 105,54 140,52 C180,50 210,62 250,74"
+                    fill="none" stroke="#4EA8FF" stroke-width="3" stroke-linecap="round"
+                    style="transition-delay:.25s"/>
+            </svg>
           </div>
         </div>
+      </article>
 
-        <!-- wireframe state, clipped on top -->
-        <div class="frame frame-wire" aria-hidden="true">
-          <div class="fw-bar"><span></span><span></span><span></span></div>
-          <div class="fw-body">
-            <div class="fw-nav"><i class="w-40"></i><i class="w-10"></i><i class="w-10"></i><i class="w-10"></i><i class="w-16 fill"></i></div>
-            <div class="fw-hero">
-              <div class="fw-hero-text"><i class="w-90"></i><i class="w-70"></i><i class="w-45"></i><i class="w-30 fill"></i></div>
-              <div class="fw-hero-art"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100"/><line x1="100" y1="0" x2="0" y2="100"/></svg></div>
-            </div>
-            <div class="fw-cards"><div></div><div></div><div></div></div>
+      <article class="demo">
+        <h3>Inventory that filters</h3>
+        <p>Dealers and consignment lots: stock that sorts by make, body style, or price the instant someone taps. No reload, no clunky third-party widget.</p>
+        <div class="stage stage-col">
+          <div class="chips" id="chips">
+            <button class="chip" data-f="all" aria-pressed="true" type="button">All</button>
+            <button class="chip" data-f="a" aria-pressed="false" type="button">Coupe</button>
+            <button class="chip" data-f="b" aria-pressed="false" type="button">Truck</button>
+            <button class="chip" data-f="c" aria-pressed="false" type="button">SUV</button>
+          </div>
+          <div class="inv" id="inv"></div>
+        </div>
+      </article>
+
+      <article class="demo">
+        <h3>Instrument gauges</h3>
+        <p>Tachometer-style dials for capacity, turnaround times, or shop stats. Sweeps into position as it scrolls into view.</p>
+        <div class="stage">
+          <div class="gauge" id="gauge">
+            <svg viewBox="0 0 200 200" aria-label="Gauge dial">
+              <path d="M30,150 A90,90 0 1,1 170,150" fill="none" stroke="#2A333C" stroke-width="12" stroke-linecap="round"/>
+              <path d="M30,150 A90,90 0 0,1 132,26" fill="none" stroke="#FF5C1A" stroke-width="12" stroke-linecap="round"/>
+              <g stroke="#4A525A" stroke-width="2.5">
+                <path d="M42,138 L52,131M52,74 L61,81M100,48 L100,59M148,74 L139,81M158,138 L148,131"/>
+              </g>
+              <g class="needle">
+                <path d="M100,100 L100,40" stroke="#F2F4F7" stroke-width="5" stroke-linecap="round"/>
+              </g>
+              <circle cx="100" cy="100" r="11" fill="#1B2229" stroke="#4A525A" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="gauge-val">Same-day turnaround</div>
+        </div>
+      </article>
+
+      <article class="demo">
+        <h3>Swipeable build cards</h3>
+        <p>Feature customer cars, past builds, or service packages in a row they flick through with a thumb — the way every app on their phone works.</p>
+        <div class="stage">
+          <div class="swipe">
+            <div><small>Stage 2</small>Turbo build</div>
+            <div><small>Full body</small>Satin wrap</div>
+            <div><small>5-step</small>Paint correction</div>
+          </div>
+          <span class="tap">swipe</span>
+        </div>
+      </article>
+
+      <article class="demo">
+        <h3>Spec sheets</h3>
+        <p>Collapsible technical detail — mods, power figures, service intervals, warranty terms. Deep information without a wall of text.</p>
+        <div class="stage">
+          <div class="spec" id="spec">
+            <button type="button" aria-expanded="false">Engine<i>+</i></button>
+            <div>2.0L turbo, forged internals, 420 whp on E85.</div>
+            <button type="button" aria-expanded="false">Suspension<i>+</i></button>
+            <div>Coilovers, adjustable arms, corner balanced.</div>
+            <button type="button" aria-expanded="false">Wheels<i>+</i></button>
+            <div>18x9.5 +22, 265/35 semi-slick.</div>
+          </div>
+          <span class="tap">tap</span>
+        </div>
+      </article>
+
+      <article class="demo">
+        <h3>Paint &amp; wrap configurator</h3>
+        <p>Let customers change colors on a vehicle before they commit. Wrap shops, paint booths, and vinyl installers close more jobs with this on the page.</p>
+        <div class="stage">
+          <div style="text-align:center;font-family:'Chakra Petch',monospace;font-size:.76rem;letter-spacing:.1em;line-height:1.9;color:var(--muted)">
+            RUNNING LIVE IN THE HERO<br>
+            <a href="#top" style="color:var(--ignition);text-decoration:none">&uarr; TAP A PAINT SWATCH</a>
           </div>
         </div>
-
-        <label class="reveal-label" for="reveal-range">Reveal the finished page</label>
-        <input id="reveal-range" class="reveal-range" type="range" min="0" max="100" value="46" step="1">
-
-        <span class="reveal-handle" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9.5 6 5 12l4.5 6M14.5 6l4.5 6-4.5 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </div>
-
-      <div class="reveal-legend">
-        <span class="lg lg-a">Week one: the layout</span>
-        <span class="lg lg-b">Week three: the live site</span>
-      </div>
-    </figure>
-  </section>
-
-  <section class="strip" aria-label="What we do in short">
-    <p>Design and build</p>
-    <p>Rewrites and redesigns</p>
-    <p>Online stores</p>
-    <p>Local search setup</p>
-    <p>Speed and accessibility</p>
-    <p>Ongoing care</p>
-  </section>
-
-  <section class="services" id="services">
-    <div class="sec-head">
-      <h2>What we build</h2>
-      <p>Most of our work falls into one of these. If yours doesn't, say so in the form and we'll tell you honestly whether we're the right shop.</p>
-    </div>
-
-    <div class="grid">
-      <article class="svc svc-wide">
-        <h3>A new website, start to finish</h3>
-        <p>You get a site designed around what your customers actually come looking for — hours, prices, proof you're real, a way to get in touch. We write the pages with you, build them, and hand over a site you can edit yourself.</p>
-        <ul class="ticks">
-          <li>Custom design, no bought template</li>
-          <li>Written and organised with you, not around you</li>
-          <li>Editable pages so you're not stuck</li>
-          <li>Works on a five-year-old phone</li>
-        </ul>
       </article>
 
-      <article class="svc">
-        <h3>Redesign of a site you already have</h3>
-        <p>Keep what works, replace what doesn't. We audit the pages you have, keep your search rankings intact with proper redirects, and rebuild the rest.</p>
+      <article class="demo">
+        <h3>Reveal &amp; ticker</h3>
+        <p>Content that arrives as they scroll, plus a drifting band of your services or the brands you carry.</p>
+        <div class="stage stage-col">
+          <div class="reveal-demo" id="revealDemo"><span></span><span></span><span></span><span></span></div>
+          <div class="ticker"><div class="ticker-run" id="tickRun"></div></div>
+        </div>
       </article>
 
-      <article class="svc">
-        <h3>Online stores</h3>
-        <p>Product pages, checkout, shipping rules, and stock that stays in sync. Built on Shopify or a custom cart, depending on how many products you carry.</p>
-      </article>
-
-      <article class="svc">
-        <h3>Booking and forms</h3>
-        <p>Appointments, quote requests, waivers, intake forms. They land in your inbox or your calendar, and they don't get eaten by spam.</p>
-      </article>
-
-      <article class="svc">
-        <h3>Getting found locally</h3>
-        <p>Google Business Profile, map listings, service-area pages, and the structured data that makes your hours and reviews show up in search.</p>
-      </article>
-
-      <article class="svc svc-accent">
-        <h3>Speed and accessibility</h3>
-        <p>A slow site loses people before they read a word, and an inaccessible one shuts customers out entirely. We test on real connections and with a screen reader before anything goes live.</p>
-      </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="who" aria-labelledby="who-h">
-    <div class="who-inner">
-      <div class="who-head">
-        <h2 id="who-h">Who we build for</h2>
-        <p>Businesses where the website has a job to do — get someone through the door, on the calendar, or on the phone. We've built for all of these.</p>
-      </div>
-      <ul class="who-list">
-        <li>Restaurants and cafés<span>Menus that change without a developer</span></li>
-        <li>Trades and contractors<span>Quote requests and service areas</span></li>
-        <li>Clinics and practices<span>Booking, intake forms, insurance pages</span></li>
-        <li>Salons and studios<span>Schedules, staff pages, gift cards</span></li>
-        <li>Law and accounting<span>Credibility, clear services, easy contact</span></li>
-        <li>Retail and makers<span>Product pages and checkout</span></li>
-        <li>Gyms and instructors<span>Class times and memberships</span></li>
-        <li>Nonprofits<span>Donations, events, volunteer signup</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="incl" aria-labelledby="incl-h">
-    <div class="sec-head">
-      <h2 id="incl-h">In every site we build</h2>
-      <p>Not add-ons, not upsells. These are in the first version of every site that leaves here.</p>
-    </div>
-    <ul class="incl-list">
-      <li><b>Works on phones</b><span>Designed for the small screen first, because that's where most of your visitors are.</span></li>
-      <li><b>Real search setup</b><span>Titles, descriptions, a sitemap, and structured data so Google understands your pages.</span></li>
-      <li><b>Your content, editable</b><span>Change text and images without touching code or paying us.</span></li>
-      <li><b>Forms that arrive</b><span>Tested end to end, with spam filtering, so enquiries reach your inbox.</span></li>
-      <li><b>Analytics</b><span>Simple visitor numbers you can actually read, without tracking cookies.</span></li>
-      <li><b>An HTTPS certificate</b><span>The padlock, renewed automatically, forever.</span></li>
-      <li><b>Legal pages</b><span>Privacy policy and terms, drafted and ready for your review.</span></li>
-      <li><b>A handover call</b><span>Recorded, so you can rewatch it in six months when you've forgotten.</span></li>
-    </ul>
-  </section>
-
-  <section class="process" id="process">
-    <div class="sec-head">
-      <h2>How a project runs</h2>
-      <p>Four steps, usually three to six weeks end to end. You always know which step you're in.</p>
+<section>
+  <div class="wrap">
+    <div class="head">
+      <span class="tag">Who I work with</span>
+      <h2>Every corner of the automotive world</h2>
+      <p>A dealer needs filterable inventory. A detailer needs before-and-afters. A tuner needs dyno charts. I build around what your side of the industry actually sells.</p>
     </div>
 
-    <ol class="steps">
-      <li>
-        <span class="step-n">1</span>
-        <h3>A conversation</h3>
-        <p>Thirty minutes, no charge. What your business does, who you're trying to reach, and what the site has to accomplish. You leave with a plan whether or not you hire us.</p>
-      </li>
-      <li>
-        <span class="step-n">2</span>
-        <h3>Layout and words</h3>
-        <p>We map the pages and draft the copy first, then design on top of it. You see the structure before anyone picks a colour, which is when changes are cheap.</p>
-      </li>
-      <li>
-        <span class="step-n">3</span>
-        <h3>Build and review</h3>
-        <p>We build the real thing on a private link you can open any time. Two rounds of revisions are built in, and we don't count small fixes against them.</p>
-      </li>
-      <li>
-        <span class="step-n">4</span>
-        <h3>Launch</h3>
-        <p>We connect your domain, set up analytics, check every form and link, and walk you through editing your own pages on a recorded call you can keep.</p>
-      </li>
-    </ol>
-  </section>
+    <div class="segs">
 
-  <section class="speed" aria-labelledby="speed-h">
-    <div class="speed-inner">
-      <div class="speed-copy">
-        <h2 id="speed-h">Most people leave before a slow page finishes</h2>
-        <p>Half of visitors give up on a page that takes more than three seconds. The difference between the two below is a real one: the same content, built two different ways.</p>
-        <button class="btn" type="button" id="speed-run">Load both pages</button>
+      <div class="seg">
+        <i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 13l2-6h14l2 6v5h-3v-2H6v2H3z"/><circle cx="7.5" cy="15" r="1.2"/><circle cx="16.5" cy="15" r="1.2"/></svg></i>
+        <b>Dealerships</b>
+        <small>Independent lots and consignment. Filterable inventory, VIN detail pages, trade-in requests.</small>
       </div>
 
-      <div class="speed-demo" id="speed-demo">
-        <div class="sd" data-lane="slow">
-          <div class="sd-top"><b>A typical template site</b><span class="sd-time" data-time>—</span></div>
-          <div class="sd-screen">
-            <div class="sd-fill"></div>
-            <div class="sd-skel"><i></i><i></i><i></i><i></i></div>
-            <p class="sd-idle">Not loaded</p>
-          </div>
-          <p class="sd-foot">Nineteen plugins, uncompressed photos, four tracking scripts.</p>
-        </div>
-
-        <div class="sd" data-lane="fast">
-          <div class="sd-top"><b>A site we built</b><span class="sd-time" data-time>—</span></div>
-          <div class="sd-screen">
-            <div class="sd-fill"></div>
-            <div class="sd-skel"><i></i><i></i><i></i><i></i></div>
-            <p class="sd-idle">Not loaded</p>
-          </div>
-          <p class="sd-foot">Static pages, images sized on the fly, nothing loaded that isn't used.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="care" id="care">
-    <div class="care-inner">
-      <div class="care-copy">
-        <h2>We don't disappear after launch</h2>
-        <p>A website is not a thing you finish. Hosting expires, plugins break, hours change at the holidays, and somebody always needs a new page in a hurry. Care plans cover the boring parts so you're not chasing a freelancer who moved on.</p>
-        <a class="btn" href="#start">Ask about care plans</a>
-      </div>
-      <ul class="care-list">
-        <li><b>Backups and updates</b><span>Nightly copies, software patched before it breaks.</span></li>
-        <li><b>Uptime monitoring</b><span>We hear about an outage before your customers do.</span></li>
-        <li><b>Content changes</b><span>Send an email, we make the edit.</span></li>
-        <li><b>Security</b><span>Certificates, spam filtering, and a locked-down login.</span></li>
-        <li><b>Monthly report</b><span>Visits, top pages, and what we'd fix next.</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="build" aria-labelledby="build-h">
-    <div class="sec-head">
-      <h2 id="build-h">How we build it</h2>
-      <p>You don't need to care about any of this. It's here because you might want to ask.</p>
-    </div>
-    <dl class="specs">
-      <div><dt>Hosting</dt><dd>Deployed on Vercel's global network. Your site is served from whichever data centre is closest to the person opening it.</dd></div>
-      <div><dt>Speed</dt><dd>Pages ship as static files where possible, images sized and converted automatically, and nothing loads that isn't used.</dd></div>
-      <div><dt>Editing</dt><dd>A content editor made for people who don't write code. Change text, swap a photo, add a page.</dd></div>
-      <div><dt>Ownership</dt><dd>The domain, the code, and the accounts are yours. If you leave, you take everything with you.</dd></div>
-      <div><dt>Accessibility</dt><dd>Built to WCAG 2.2 AA — real contrast, keyboard navigation, and labels that make sense out loud.</dd></div>
-      <div><dt>Privacy</dt><dd>Analytics without third-party tracking cookies, so you don't need a consent banner in most cases.</dd></div>
-    </dl>
-  </section>
-
-  <section class="about" id="about" aria-labelledby="about-h">
-    <div class="about-inner">
-      <div>
-        <h2 id="about-h">A small studio, on purpose</h2>
-        <p>Murphy's Productions is a two-person shop. The person you talk to on the first call is the person who designs your site and the person who answers the email eighteen months later when something breaks.</p>
-        <p>We started because too many small businesses were handed a site they couldn't change, by someone they couldn't reach, on a platform they didn't own. We build the opposite of that.</p>
-      </div>
-      <ul class="about-facts">
-        <li><b>Founded</b><span>2019</span></li>
-        <li><b>Sites launched</b><span>60+</span></li>
-        <li><b>Typical build</b><span>3–6 weeks</span></li>
-        <li><b>Reply time</b><span>Within one business day</span></li>
-        <li><b>Where we work</b><span>South Florida, and remotely anywhere in the US</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="words" aria-labelledby="words-h">
-    <h2 id="words-h">What clients say</h2>
-    <div class="words-grid">
-      <figure>
-        <blockquote>They asked better questions than anyone we'd talked to. The site went up in a month and we started getting catering enquiries the same week.</blockquote>
-        <figcaption>Owner, neighbourhood restaurant</figcaption>
-      </figure>
-      <figure>
-        <blockquote>I can change my own hours and prices now. That sounds small. It has saved me from calling somebody about fifty times.</blockquote>
-        <figcaption>Owner, hair studio</figcaption>
-      </figure>
-      <figure>
-        <blockquote>Our old site took nine seconds to load on a phone. This one is instant, and the quote form actually works.</blockquote>
-        <figcaption>Operations manager, roofing contractor</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section class="prep" aria-labelledby="prep-h">
-    <div class="prep-inner">
-      <div class="prep-copy">
-        <h2 id="prep-h">What to have ready</h2>
-        <p>Nothing here is required to get started — we can begin with an empty list. But projects that have most of this move about twice as fast. Tick off what you already have.</p>
-        <p class="prep-count" id="prep-count" role="status">Nothing ticked yet.</p>
-      </div>
-      <ul class="prep-list" id="prep-list">
-        <li><label><input type="checkbox"><span><b>Your logo</b>The original file if you have it, a photo of your sign if you don't.</span></label></li>
-        <li><label><input type="checkbox"><span><b>Photos</b>Your space, your team, your work. Phone photos in good light beat stock images every time.</span></label></li>
-        <li><label><input type="checkbox"><span><b>Your hours and address</b>Including the holiday exceptions everybody forgets.</span></label></li>
-        <li><label><input type="checkbox"><span><b>A list of what you sell</b>Services or products, roughly grouped.</span></label></li>
-        <li><label><input type="checkbox"><span><b>Domain access</b>Whoever registered it, and the login if you can find it.</span></label></li>
-        <li><label><input type="checkbox"><span><b>Two or three sites you like</b>Any industry. Tell us what you like about them.</span></label></li>
-        <li><label><input type="checkbox"><span><b>Who you're trying to reach</b>One sentence about your typical customer.</span></label></li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="faq" aria-labelledby="faq-h">
-    <h2 id="faq-h">Questions we get</h2>
-    <div class="faq-list">
-      <details>
-        <summary>How long does it take?</summary>
-        <p>Three to six weeks for most sites, from the first call to launch. Stores and anything with booking logic run longer. The thing that slows projects down is almost always waiting on photos and text, so we'll pester you about those early.</p>
-      </details>
-      <details>
-        <summary>Can I update it myself?</summary>
-        <p>Yes, and we'd rather you did. Every site comes with an editor for text, images, and pages, plus a recording of us walking through it with your actual content.</p>
-      </details>
-      <details>
-        <summary>Do I need to write everything?</summary>
-        <p>No. We draft the copy and you correct it. You know your business better than we do, but a blank page is a bad place to start.</p>
-      </details>
-      <details>
-        <summary>What if I already have a domain?</summary>
-        <p>We'll use it. You keep the registration in your own name — we just point it at the new site and handle the certificate.</p>
-      </details>
-      <details>
-        <summary>What do you need from me?</summary>
-        <p>Your logo if you have one, photos if you have them, and about an hour of your time a week during the build. If you don't have decent photos, we'll tell you before it becomes a problem.</p>
-      </details>
-      <details>
-        <summary>Do you work with businesses outside your area?</summary>
-        <p>Yes. Most of the work happens over email and video calls regardless of where you are.</p>
-      </details>
-      <details>
-        <summary>Who owns the site when it's done?</summary>
-        <p>You do. The domain stays registered in your name, the accounts are yours, and the code is handed over. We don't hold anything hostage — if you ever want to move to another shop, you can, and we'll help with the transfer.</p>
-      </details>
-      <details>
-        <summary>What happens if I want changes after launch?</summary>
-        <p>Small edits are covered by a care plan. Bigger pieces — a new section, a second language, a booking system you didn't need at first — we quote separately before doing anything.</p>
-      </details>
-      <details>
-        <summary>Will I lose my Google rankings in a redesign?</summary>
-        <p>Not if it's done properly. We map every old page to a new one with permanent redirects, keep the URLs that are already ranking where we can, and watch search traffic for the first month after launch.</p>
-      </details>
-      <details>
-        <summary>Do you fix sites you didn't build?</summary>
-        <p>Sometimes. It depends what it's built on and how badly. Send us the address and we'll tell you honestly whether repairing it or replacing it is the better spend.</p>
-      </details>
-    </div>
-  </section>
-
-  <section class="start" id="start">
-    <div class="start-inner">
-      <div class="start-copy">
-        <h2>Tell us about the project</h2>
-        <p>Fill this in and you'll hear back within one business day. If it turns out we're not the right fit, we'll say so and point you somewhere better.</p>
-        <p class="start-alt">Prefer email? <a href="mailto:hello@murphysproductions.com">hello@murphysproductions.com</a></p>
+      <div class="seg">
+        <i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M14.7 6.3a4 4 0 01-5 5L5 16a2.1 2.1 0 003 3l4.7-4.7a4 4 0 005-5l-2.4 2.4-2.1-2.1z"/></svg></i>
+        <b>Repair shops</b>
+        <small>General mechanics and specialists. Service menus, appointment booking, and clear pricing pages.</small>
       </div>
 
-      <form class="form" id="contact-form" action="https://formspree.io/f/your-form-id" method="POST" novalidate>
-        <div class="field">
-          <label for="name">Your name</label>
-          <input id="name" name="name" type="text" autocomplete="name" required>
-        </div>
-        <div class="field">
-          <label for="business">Business name</label>
-          <input id="business" name="business" type="text" autocomplete="organization">
-        </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" required>
-        </div>
-        <div class="field">
-          <label for="kind">What do you need?</label>
-          <select id="kind" name="kind">
-            <option>A new website</option>
-            <option>A redesign of my current site</option>
-            <option>An online store</option>
-            <option>Booking or forms</option>
-            <option>Help getting found on Google</option>
-            <option>Care for a site I already have</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-        <div class="field field-full">
-          <label for="detail">What should it do?</label>
-          <textarea id="detail" name="detail" rows="4" placeholder="A sentence or two is plenty. What your business does, and what the site needs to accomplish."></textarea>
-        </div>
-        <div class="field field-full form-foot">
-          <button class="btn" type="submit">Send it over</button>
-          <p class="form-note" id="form-note" role="status"></p>
-        </div>
-      </form>
+      <div class="seg">
+        <i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 3s5 5.5 5 9a5 5 0 01-10 0c0-3.5 5-9 5-9z"/><path d="M9.5 13a2.5 2.5 0 005 0"/></svg></i>
+        <b>Detailing &amp; ceramic</b>
+        <small>Paint correction, coatings, and interior work. Before-and-after sliders that sell the difference.</small>
+      </div>
+
+      <div class="seg">
+        <i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg></i>
+        <b>Performance &amp; tuning</b>
+        <small>Dyno charts, stage packages, and build galleries for shops selling power.</small>
+      </div>
+
+      <div class="seg">
+        <i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg></i>
+        <b>Wraps, tint &amp; PPF</b>
+        <small>Color configurators, film comparisons, and portfolios that show the finish properly.</small>
+      </div>
+
+      <div class="seg">
+        <i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3v5.5M21 12h-5.5M12 21v-5.5M3 12h5.5"/></svg></i>
+        <b>Wheels &amp; tires</b>
+        <small>Spinnable product views, fitment guides, and staggered-setup pages.</small>
+      </div>
+
+      <div class="seg">
+        <i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 17V9l5-4h8l5 4v8"/><path d="M3 17h18M8 17v-4h8v4"/></svg></i>
+        <b>Body &amp; collision</b>
+        <small>Repair galleries, insurance workflow explainers, and estimate requests.</small>
+      </div>
+
+      <div class="seg">
+        <i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></i>
+        <b>Restoration &amp; classics</b>
+        <small>Long-form build journals, era-appropriate design, and provenance detail.</small>
+      </div>
+
+      <div class="seg">
+        <i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2"/></svg></i>
+        <b>Car audio &amp; electronics</b>
+        <small>Install galleries, system builders, and product-line pages.</small>
+      </div>
+
+      <div class="seg">
+        <i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 13l2-6h9l2 6v5h-3v-2H6v2H3z"/><circle cx="7" cy="15" r="1.1"/><path d="M18 8h3M19.5 6.5v3"/></svg></i>
+        <b>Mobile mechanics</b>
+        <small>Service-area maps, emergency call buttons, and on-the-spot booking.</small>
+      </div>
+
+      <div class="seg">
+        <i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 20V7l8-4 8 4v13"/><path d="M4 20h16M9 20v-6h6v6"/><path d="M8 10h8"/></svg></i>
+        <b>Fabrication &amp; custom</b>
+        <small>Cages, exhaust, one-off builds. Process pages that justify custom pricing.</small>
+      </div>
+
+      <div class="seg">
+        <i><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 4v16M5 4l14 4-14 4"/></svg></i>
+        <b>Clubs, shows &amp; track days</b>
+        <small>Event calendars, registration, sponsor pages, and results.</small>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="close">
+    <span class="tag">Start here</span>
+    <h2>Send me your shop's website</h2>
+    <p>Text or email me a link and I'll tell you straight what's holding it back — and whether a rebuild is actually worth your money. No charge for that part.</p>
+
+    <div class="contact">
+      <a href="tel:+19543364261">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 3h4l2 5-2.5 1.5a12 12 0 006 6L16 13l5 2v4a2 2 0 01-2.2 2A17 17 0 013 5.2 2 2 0 015 3z"/></svg>
+        954-336-4261
+      </a>
+      <a href="mailto:shanemmurphy9@gmail.com">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        shanemmurphy9@gmail.com
+      </a>
     </div>
   </section>
+</div>
 
 </main>
 
-<footer class="foot">
-  <div class="foot-mark">
-    <span aria-hidden="true">
-      <svg viewBox="0 0 32 32" width="26" height="26"><rect x="1.5" y="1.5" width="29" height="29" rx="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 23V10l8 8 8-8v13" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"/></svg>
-    </span>
-    <b>Murphy's Productions</b>
+<footer>
+  <div class="wrap">
+    <span>Murphy's Web Services</span>
+    <span>Pembroke Pines, Florida</span>
+    <span><a href="tel:+19543364261">954-336-4261</a></span>
   </div>
-  <p class="foot-line">Websites built for small businesses.</p>
-  <div class="foot-cols">
-    <div>
-      <h3>What we build</h3>
-      <a href="#services">New websites</a>
-      <a href="#services">Redesigns</a>
-      <a href="#services">Online stores</a>
-      <a href="#services">Booking and forms</a>
-      <a href="#services">Local search</a>
-    </div>
-    <div>
-      <h3>The studio</h3>
-      <a href="#about">About us</a>
-      <a href="#process">How it works</a>
-      <a href="#care">After launch</a>
-      <a href="#faq-h">Questions</a>
-    </div>
-    <div>
-      <h3>Get in touch</h3>
-      <a href="#start">Start a project</a>
-      <a href="mailto:hello@murphysproductions.com">hello@murphysproductions.com</a>
-      <a href="tel:+15550001234">(555) 000-1234</a>
-      <span class="foot-note">Mon&ndash;Fri, 9am&ndash;5pm ET</span>
-    </div>
-  </div>
-  <p class="foot-fine"><span id="year">2026</span> Murphy's Productions</p>
 </footer>
 
 <script src="script.js"></script>
+
 </body>
 </html>

@@ -1,199 +1,117 @@
-/* Murphy's Productions — hero reveal + contact form */
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-(function () {
-  'use strict';
+  /* ---- paint configurator ---- */
+  var paint = document.getElementById('paint');
+  var swName = document.getElementById('swName');
+  if (!reduce) paint.style.transition = 'fill .45s ease';
 
-  /* --- hero reveal ------------------------------------------------ */
-  var stage = document.querySelector('.reveal-stage');
-  var range = document.getElementById('reveal-range');
+  document.getElementById('swatches').addEventListener('click', function(e){
+    var b = e.target.closest('.sw'); if (!b) return;
+    this.querySelectorAll('.sw').forEach(function(s){ s.setAttribute('aria-pressed', s === b); });
+    paint.setAttribute('fill', b.dataset.c);
+    swName.textContent = b.dataset.n;
+  });
 
-  if (stage && range) {
-    var setPos = function (value) {
-      stage.style.setProperty('--pos', value + '%');
-    };
+  /* ---- drag to spin wheel ---- */
+  var wrap = document.getElementById('rimWrap');
+  var spin = document.getElementById('rimSpin');
+  var angle = 0, last = null, vel = 0, touched = false;
 
-    setPos(range.value);
-    range.addEventListener('input', function () { setPos(range.value); });
+  function apply(){ spin.style.transform = 'rotate(' + angle + 'deg)'; }
 
-    // Dragging anywhere on the stage moves the divider.
-    var dragging = false;
+  wrap.addEventListener('pointerdown', function(e){
+    last = e.clientX; touched = true; vel = 0;
+    wrap.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
 
-    var moveTo = function (clientX) {
-      var box = stage.getBoundingClientRect();
-      var pct = ((clientX - box.left) / box.width) * 100;
-      pct = Math.max(0, Math.min(100, pct));
-      range.value = pct;
-      setPos(pct);
-    };
+  wrap.addEventListener('pointermove', function(e){
+    if (last === null) return;
+    var dx = e.clientX - last;
+    last = e.clientX;
+    vel = dx * 0.9;
+    angle += vel;
+    apply();
+  });
 
-    stage.addEventListener('pointerdown', function (e) {
-      dragging = true;
-      stage.setPointerCapture(e.pointerId);
-      moveTo(e.clientX);
-    });
+  function release(){ last = null; }
+  wrap.addEventListener('pointerup', release);
+  wrap.addEventListener('pointercancel', release);
 
-    stage.addEventListener('pointermove', function (e) {
-      if (dragging) moveTo(e.clientX);
-    });
-
-    ['pointerup', 'pointercancel'].forEach(function (evt) {
-      stage.addEventListener(evt, function () { dragging = false; });
-    });
-  }
-
-
-  /* --- speed demo --------------------------------------------------
-     Two lanes fill at different rates when the button is pressed.
-     Reduced-motion users get the finished state and the numbers.
-  ------------------------------------------------------------------ */
-  var runBtn = document.getElementById('speed-run');
-  var demo = document.getElementById('speed-demo');
-
-  if (runBtn && demo) {
-    var lanes = [
-      { el: demo.querySelector('[data-lane="slow"]'), duration: 6400 },
-      { el: demo.querySelector('[data-lane="fast"]'), duration: 900 }
-    ];
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var timers = [];
-
-    var reset = function () {
-      timers.forEach(clearTimeout);
-      timers = [];
-      lanes.forEach(function (lane) {
-        lane.el.classList.remove('is-running', 'is-done');
-        lane.el.querySelector('.sd-fill').style.height = '0%';
-        var t = lane.el.querySelector('[data-time]');
-        t.textContent = '\u2014';
-        t.removeAttribute('data-done');
-      });
-    };
-
-    var finish = function (lane) {
-      lane.el.classList.remove('is-running');
-      lane.el.classList.add('is-done');
-      lane.el.querySelector('.sd-fill').style.height = '100%';
-      var t = lane.el.querySelector('[data-time]');
-      t.textContent = (lane.duration / 1000).toFixed(1) + 's';
-      t.setAttribute('data-done', '');
-    };
-
-    runBtn.addEventListener('click', function () {
-      reset();
-      runBtn.disabled = true;
-      runBtn.textContent = 'Loading\u2026';
-
-      lanes.forEach(function (lane) {
-        if (reduced) { finish(lane); return; }
-
-        lane.el.classList.add('is-running');
-        var fill = lane.el.querySelector('.sd-fill');
-        var time = lane.el.querySelector('[data-time]');
-        var start = performance.now();
-
-        var tick = function (now) {
-          var p = Math.min(1, (now - start) / lane.duration);
-          fill.style.height = (p * 100) + '%';
-          time.textContent = ((now - start) / 1000).toFixed(1) + 's';
-          if (p < 1) requestAnimationFrame(tick);
-          else finish(lane);
-        };
-        requestAnimationFrame(tick);
-      });
-
-      var longest = Math.max(lanes[0].duration, lanes[1].duration);
-      timers.push(setTimeout(function () {
-        runBtn.disabled = false;
-        runBtn.textContent = 'Run it again';
-      }, reduced ? 200 : longest + 150));
-    });
-  }
-
-  /* --- prep checklist ---------------------------------------------- */
-  var prep = document.getElementById('prep-list');
-  var prepCount = document.getElementById('prep-count');
-
-  if (prep && prepCount) {
-    var boxes = prep.querySelectorAll('input[type="checkbox"]');
-
-    prep.addEventListener('change', function () {
-      var done = 0;
-      boxes.forEach(function (b) { if (b.checked) done++; });
-
-      if (done === 0) {
-        prepCount.textContent = 'Nothing ticked yet.';
-      } else if (done === boxes.length) {
-        prepCount.textContent = 'All seven ready. You are in unusually good shape \u2014 send the form.';
-      } else {
-        prepCount.textContent = done + ' of ' + boxes.length + ' ready. That is plenty to start with.';
+  if (!reduce){
+    (function loop(){
+      if (last === null){
+        if (Math.abs(vel) > 0.05){ angle += vel; vel *= 0.955; apply(); }
+        else if (!touched){ angle += 0.16; apply(); }
       }
-    });
+      requestAnimationFrame(loop);
+    })();
+  } else { apply(); }
+
+  /* ---- scroll-triggered pieces ---- */
+  function countTo(el, to, dur){
+    if (reduce){ el.textContent = to; return; }
+    var start = null;
+    function tick(t){
+      if (!start) start = t;
+      var p = Math.min((t - start)/dur, 1);
+      el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
   }
 
-  /* --- current year ----------------------------------------------- */
-  var year = document.getElementById('year');
-  if (year) year.textContent = new Date().getFullYear();
-
-  /* --- contact form ------------------------------------------------
-     Posts to Formspree via fetch so the visitor stays on the page.
-     Falls back to a normal form submit if fetch fails.
-  ------------------------------------------------------------------ */
-  var form = document.getElementById('contact-form');
-  var note = document.getElementById('form-note');
-
-  if (form && note) {
-    var say = function (message, state) {
-      note.textContent = message;
-      note.setAttribute('data-state', state);
-    };
-
-    form.addEventListener('submit', function (e) {
-      var name = form.elements.name;
-      var email = form.elements.email;
-
-      name.setAttribute('aria-invalid', 'false');
-      email.setAttribute('aria-invalid', 'false');
-
-      if (!name.value.trim()) {
-        e.preventDefault();
-        name.setAttribute('aria-invalid', 'true');
-        name.focus();
-        say('Add your name so we know who we\u2019re replying to.', 'error');
-        return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (!en.isIntersecting) return;
+      en.target.classList.add('on');
+      if (en.target.id === 'dyno'){
+        countTo(document.getElementById('hpVal'), 487, 1800);
+        countTo(document.getElementById('tqVal'), 412, 1800);
       }
-
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())) {
-        e.preventDefault();
-        email.setAttribute('aria-invalid', 'true');
-        email.focus();
-        say('That email address looks incomplete. Check it and send again.', 'error');
-        return;
-      }
-
-      // Not configured yet — let the browser submit normally so nothing is lost.
-      if (form.action.indexOf('your-form-id') !== -1) return;
-
-      e.preventDefault();
-      var button = form.querySelector('button[type="submit"]');
-      button.disabled = true;
-      say('Sending\u2026', 'busy');
-
-      fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { Accept: 'application/json' }
-      })
-        .then(function (res) {
-          if (!res.ok) throw new Error('Request failed');
-          form.reset();
-          say('Sent. You\u2019ll hear back within one business day.', 'ok');
-        })
-        .catch(function () {
-          say('That didn\u2019t send. Email hello@murphysproductions.com instead.', 'error');
-        })
-        .then(function () {
-          button.disabled = false;
-        });
+      io.unobserve(en.target);
     });
+  }, { threshold: .35 });
+
+  ['dyno','gauge','revealDemo'].forEach(function(id){
+    io.observe(document.getElementById(id));
+  });
+
+  /* ---- before / after ---- */
+  var r = document.getElementById('baRange'),
+      n = document.getElementById('baNew'),
+      l = document.getElementById('baLine');
+  function ba(){ var v = r.value + '%'; n.style.setProperty('--sp', v); l.style.setProperty('--sp', v); }
+  r.addEventListener('input', ba); ba();
+
+  /* ---- inventory filter ---- */
+  var kinds = ['a','b','c'], inv = document.getElementById('inv');
+  for (var i = 0; i < 9; i++){
+    var t = document.createElement('div');
+    t.className = 'car-tile';
+    t.dataset.k = kinds[i % 3];
+    inv.appendChild(t);
   }
+  document.getElementById('chips').addEventListener('click', function(e){
+    var b = e.target.closest('.chip'); if (!b) return;
+    this.querySelectorAll('.chip').forEach(function(c){ c.setAttribute('aria-pressed', c === b); });
+    var f = b.dataset.f;
+    inv.querySelectorAll('.car-tile').forEach(function(t){
+      t.classList.toggle('off', f !== 'all' && t.dataset.k !== f);
+    });
+  });
+
+  /* ---- spec sheet ---- */
+  document.getElementById('spec').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    var open = b.getAttribute('aria-expanded') === 'true';
+    b.setAttribute('aria-expanded', !open);
+    b.nextElementSibling.classList.toggle('open', !open);
+  });
+
+  /* ---- ticker ---- */
+  var items = ['Ceramic coating','Paint correction','Vinyl wrap','Window tint','PPF','Dyno tuning','Wheels &amp; tires','Detailing'];
+  document.getElementById('tickRun').innerHTML =
+    (items.join(' <span style="color:#FF5C1A">/</span> ') + ' <span style="color:#FF5C1A">/</span> ').repeat(2);
 })();
